@@ -36,5 +36,17 @@ namespace Alura.LeilaoOnline.WebApp.Dados
             _context.Leiloes.Add(leilao);
             _context.SaveChanges();
         }
+
+        public void Alterar(Leilao model)
+        {
+            _context.Leiloes.Update(model);
+            _context.SaveChanges();
+        }                
+
+        public void Excluir(Leilao model)
+        {
+            _context.Leiloes.Remove(model);
+            _context.SaveChanges();
+        }
     }
 }
