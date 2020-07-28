@@ -3,13 +3,13 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Alura.LeilaoOnline.WebApp.Dados
+namespace Alura.LeilaoOnline.WebApp.Dados.EFCore
 {
-    public class LeilaoDao
+    public class LeilaoDaoEFCore
     {
         AppDbContext _context;
 
-        public LeilaoDao()
+        public LeilaoDaoEFCore()
         {
             _context = new AppDbContext();
         }
