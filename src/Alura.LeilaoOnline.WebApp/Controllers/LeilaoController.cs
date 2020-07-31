@@ -1,30 +1,25 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Alura.LeilaoOnline.WebApp.Dados
-using Alura.LeilaoOnline.WebApp.Dados.EFCore;
+using Alura.LeilaoOnline.WebApp.Dados;
 using Alura.LeilaoOnline.WebApp.Models;
 using System;
-using System.Collections.Generic;
 
 namespace Alura.LeilaoOnline.WebApp.Controllers
 {
     public class LeilaoController : Controller
     {
+        ILeilaoDao _dao;
 
-        AppDbContext _context;
-        LeilaoDaoEFCore _dao;
-
-        public LeilaoController()
+        public LeilaoController(ILeilaoDao dao)
         {
-            _context = new AppDbContext();
+            _dao = dao;
         }
 
         public IActionResult Index()
         {
             var leiloes = _dao.BuscarLeiloes();
             return View(leiloes);
-        } 
+        }
 
         [HttpGet]
         public IActionResult Insert()
@@ -73,7 +68,7 @@ namespace Alura.LeilaoOnline.WebApp.Controllers
         [HttpPost]
         public IActionResult Inicia(int id)
         {
-            var leilao = _dao.BuscarPorId(id); 
+            var leilao = _dao.BuscarPorId(id);
             if (leilao == null) return NotFound();
             if (leilao.Situacao != SituacaoLeilao.Rascunho) return StatusCode(405);
             leilao.Situacao = SituacaoLeilao.Pregao;
@@ -109,8 +104,8 @@ namespace Alura.LeilaoOnline.WebApp.Controllers
         {
             ViewData["termo"] = termo;
             var leiloes = _dao.BuscarLeiloes()
-                .Where(l => string.IsNullOrWhiteSpace(termo) || 
-                    l.Titulo.ToUpper().Contains(termo.ToUpper()) || 
+                .Where(l => string.IsNullOrWhiteSpace(termo) ||
+                    l.Titulo.ToUpper().Contains(termo.ToUpper()) ||
                     l.Descricao.ToUpper().Contains(termo.ToUpper()) ||
                     l.Categoria.Descricao.ToUpper().Contains(termo.ToUpper())
                 );

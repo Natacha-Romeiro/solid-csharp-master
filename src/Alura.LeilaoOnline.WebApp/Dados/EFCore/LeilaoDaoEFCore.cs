@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Alura.LeilaoOnline.WebApp.Dados.EFCore
 {
-    public class LeilaoDaoEFCore
+    public class LeilaoDaoEFCore : ILeilaoDao
     {
         AppDbContext _context;
 
