@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Alura.LeilaoOnline.WebApp.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Alura.LeilaoOnline.WebApp.Services
 {
-    public class IProdutoService
+    public interface IProdutoService
     {
+        IEnumerable<Leilao> PesquisaLeiloesEmPregaoPorTermo(string termo);
+        IEnumerable<CategoriaComInfoLeilao> ConsultaCategoriasComTotalDeLeiloesEmPregao();
+        IEnumerable<CategoriaComInfoLeilao> ConsultaCategoriasPorIdComLeiloesEmPregao(int id);
     }
 }

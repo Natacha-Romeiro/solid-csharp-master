@@ -1,11 +1,17 @@
-﻿using System;
+﻿using Alura.LeilaoOnline.WebApp.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Alura.LeilaoOnline.WebApp.Services
 {
-    public class IAdminService
+    public interface IAdminService
     {
+        IEnumerable<Categoria> ConsultaCategorias();
+        IEnumerable<Leilao> ConsultaLeiloes();
+        Leilao ConsultaLeilaoPorId(int id);
+        void CadastraLeilao(Leilao leilao);
+        void ModificaLeilao(Leilao leilao);
+        void RemoveLeilao(Leilao leilao);
+        void IniciaLeilaoDoPregaoComId(int id);
+        void FinalizaLeilaoDoPregaoComId(int id);
     }
 }
